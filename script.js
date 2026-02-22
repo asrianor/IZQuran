@@ -11,7 +11,10 @@ const UI = {
     prepLayoutSelect: document.getElementById('prepLayoutSelect'),
     prepParams: document.getElementById('prepParams'),
     interactiveOrderSelect: document.getElementById('interactiveOrderSelect'),
-    rangeFilter: document.getElementById('rangeFilter')
+    rangeFilter: document.getElementById('rangeFilter'),
+    landingPage: document.getElementById('landingPage'),
+    mainAppArea: document.getElementById('mainAppArea'),
+    btnStartApp: document.getElementById('btnStartApp')
 };
 
 let currentSurahData = null;
@@ -39,6 +42,19 @@ function stopAudio() {
     UI.audioPlayer.pause();
     UI.audioPlayer.currentTime = 0;
 }
+
+// 0. Landing Page Transition
+UI.btnStartApp.addEventListener('click', () => {
+    // Fade out landing page
+    UI.landingPage.style.animation = 'fadeOut 0.3s ease-in-out forwards';
+
+    setTimeout(() => {
+        UI.landingPage.style.display = 'none';
+        UI.mainAppArea.style.display = 'block';
+        UI.mainAppArea.style.opacity = '0';
+        UI.mainAppArea.style.animation = 'fadeIn 0.5s ease-in-out forwards';
+    }, 300);
+});
 
 function parseRange(rangeStr, maxAyat) {
     if (!rangeStr || rangeStr.trim() === '') return null; // Return null if no filter
