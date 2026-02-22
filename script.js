@@ -57,7 +57,7 @@ UI.btnStartApp.addEventListener('click', () => {
 
     setTimeout(() => {
         UI.landingPage.style.display = 'none';
-        UI.mainAppArea.style.display = 'block';
+        UI.mainAppArea.style.display = 'flex';
         UI.mainAppArea.style.opacity = '0';
         UI.mainAppArea.style.animation = 'fadeIn 0.5s ease-in-out forwards';
     }, 300);
