@@ -16,8 +16,17 @@
     <!-- Top Navigation Bar -->
     <nav class="navbar glass-panel fade-in"
         style="border-radius:0; border-left:none; border-right:none; border-top:none; padding:1rem 2rem; display:flex; justify-content:space-between; align-items:center; position:sticky; top:0; z-index:100; margin-bottom:1rem;">
-        <div style="font-weight:800; font-size:1.2rem; color:white;">IZQuran</div>
+        <div style="font-weight:800; font-size:1.2rem; color:white; display: flex; align-items: center; gap: 1rem;">
+            <!-- Mobile Menu Toggle Button -->
+            <button id="btnToggleSidebar"
+                style="background:transparent; border:none; color:white; font-size:1.5rem; cursor:pointer;"
+                class="hidden" title="Toggle Menu">☰</button>
+            IZQuran
+        </div>
         <div style="display:flex; gap:1rem;">
+            <!-- Desktop Layout Toggle Button -->
+            <button id="btnToggleLayout" class="btn-show-full"
+                style="display: flex; align-items: center; border-color: var(--accent);">◧ Toggle Panel</button>
             <a href="index.html" class="btn-show-full"
                 style="text-decoration:none; display:flex; align-items:center;">🏠 Beranda</a>
             <a href="readme.html" class="btn-show-full"
@@ -60,98 +69,129 @@
 
 
         <!-- Main App Area (Awalnya Sembunyi) -->
-        <div id="mainAppArea" style="display: none;">
-            <header class="glass-panel text-center pulse-in">
-                <h1 class="gradient-text">IZQuran - Pilih Surah</h1>
-                <p class="subtitle" style="margin-bottom:1.5rem;">Silakan pilih atau muat Surah target hafalan Anda.</p>
+        <div id="mainAppArea" class="dashboard-layout" style="display: none;">
 
-                <div class="setup-area mt-4">
-                    <div class="input-group">
-                        <input type="number" id="surahNumber" placeholder="No. Surah (contoh: 78)" min="1" max="114" />
-                        <button id="btnLoadSurah" class="btn btn-primary">Muat Surah</button>
-                    </div>
-                </div>
-            </header>
-
-            <div id="loader" class="hidden text-center mt-8">
-                <div class="spinner"></div>
-                <p>Memuat Ayat...</p>
-            </div>
-
-
-            <div id="modeSelection" class="glass-panel hidden fade-in">
-                <div class="surah-info text-center mb-8">
-                    <h2 id="surahTitle" class="gradient-text"></h2>
-                    <p id="surahDesc" class="subtitle"></p>
+            <!-- LEFT PANEL (Sidebar) -->
+            <aside id="leftPanel" class="left-panel glass-panel">
+                <div class="text-center mb-4">
+                    <h2 class="gradient-text" style="font-size: 1.5rem; margin-bottom: 0.5rem;">Cari Surah</h2>
                 </div>
 
-                <!-- Opsi Tambahan -->
-                <div class="config-section glass-card mb-8">
-                    <h3 class="mb-4 text-center">⚙️ Pengaturan Pembelajaran</h3>
+                <div class="input-group" style="flex-direction: column;">
+                    <input type="number" id="surahNumber" placeholder="No. Surah (contoh: 78)" min="1" max="114"
+                        style="width: 100%;" />
+                    <button id="btnLoadSurah" class="btn btn-primary w-full">Muat Surah</button>
+                </div>
 
-                    <div class="mb-4"
+                <hr style="border-color: var(--glass-border); margin: 1rem 0;">
+
+                <div id="loader" class="hidden text-center">
+                    <div class="spinner"></div>
+                    <p style="font-size: 0.9rem;">Memuat Ayat...</p>
+                </div>
+
+                <div id="sidebarConfig" class="hidden fade-in" style="display:flex; flex-direction:column; gap:1.5rem;">
+                    <!-- Pengaturan Ukuran Huruf (Font Size) -->
+                    <div
                         style="background: rgba(0,0,0,0.2); padding: 1rem; border-radius: 12px; border: 1px solid var(--glass-border);">
-                        <label style="display:block; margin-bottom:0.5rem; color:var(--accent); font-weight:600;">Pilih
-                            Rentang Ayat (Opsional):</label>
-                        <input type="text" id="rangeFilter"
-                            placeholder="Contoh: 1-5, 11-20 (Kosongkan untuk semua ayat)" class="w-full"
-                            style="padding: 0.8rem 1rem;">
+                        <label
+                            style="display:flex; justify-content:space-between; margin-bottom:0.5rem; color:var(--accent); font-weight:600; font-size: 0.9rem;">
+                            <span>Besar Huruf Arab:</span>
+                            <span id="fontValue" style="color: white; font-weight: normal;">L</span>
+                        </label>
+                        <input type="range" id="fontSlider" min="1" max="5" step="1" value="3"
+                            style="width: 100%; cursor: pointer;">
+                        <div
+                            style="display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--text-muted); margin-top: 0.3rem;">
+                            <span>A</span><span>A</span>
+                        </div>
                     </div>
 
-                    <div class="config-grid">
-                        <!-- Config Persiapan -->
-                        <div class="config-box">
-                            <label>Khusus Mode Persiapan:</label>
-                            <select id="prepLayoutSelect" class="w-full mt-2">
-                                <option value="default">Daftar Biasa</option>
-                                <option value="perX">Tabel Per-X Ayat</option>
-                                <option value="splitLR">Pisah Kiri-Kanan</option>
-                                <option value="focusCenter">Tengah Fokus</option>
-                                <option value="quadrants">4 Kuadran</option>
-                            </select>
+                    <!-- Filter Rentang -->
+                    <div
+                        style="background: rgba(0,0,0,0.2); padding: 1rem; border-radius: 12px; border: 1px solid var(--glass-border);">
+                        <label
+                            style="display:block; margin-bottom:0.5rem; color:var(--accent); font-weight:600; font-size: 0.9rem;">Rentang
+                            Ayat (Opsional):</label>
+                        <input type="text" id="rangeFilter" placeholder="Contoh: 1-5" class="w-full"
+                            style="padding: 0.6rem; font-size: 0.9rem;">
+                    </div>
 
-                            <div id="prepParams" class="mt-4 hidden custom-params">
-                                <!-- Injected by JS based on select -->
-                            </div>
-                        </div>
+                    <!-- Config Box 1 -->
+                    <div class="config-box">
+                        <label style="font-size: 0.9rem;">Mode Persiapan:</label>
+                        <select id="prepLayoutSelect" class="w-full mt-2" style="padding: 0.5rem;">
+                            <option value="default">Daftar Biasa</option>
+                            <option value="perX">Tabel Per-X Ayat</option>
+                            <option value="splitLR">Pisah Kiri-Kanan</option>
+                            <option value="focusCenter">Tengah Fokus</option>
+                            <option value="quadrants">4 Kuadran</option>
+                        </select>
+                        <div id="prepParams" class="mt-4 hidden custom-params"></div>
+                    </div>
 
-                        <!-- Config Interaktif -->
-                        <div class="config-box">
-                            <label>Khusus Mode Potongan/Angka:</label>
-                            <select id="interactiveOrderSelect" class="w-full mt-2">
-                                <option value="sequential">Urut (Dari Awal)</option>
-                                <option value="random">Acak (Random)</option>
-                                <option value="reverse">Mundur (Dari Akhir)</option>
-                            </select>
-                        </div>
+                    <!-- Config Box 2 -->
+                    <div class="config-box">
+                        <label style="font-size: 0.9rem;">Mode Potongan/Angka:</label>
+                        <select id="interactiveOrderSelect" class="w-full mt-2" style="padding: 0.5rem;">
+                            <option value="sequential">Urut (Dari Awal)</option>
+                            <option value="random">Acak (Random)</option>
+                            <option value="reverse">Mundur (Dari Akhir)</option>
+                        </select>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- RIGHT PANEL (Main Workspace) -->
+            <div id="mainWorkspaceArea" class="main-workspace-area">
+
+                <!-- Initial Welcome / Mode Selection -->
+                <div id="modeSelection" class="glass-panel text-center pulse-in">
+                    <h1 class="gradient-text" style="font-size: 2rem;">Workspace Hafalan</h1>
+                    <p class="subtitle" style="margin-bottom:1.5rem;" id="surahDescGlobal">Silakan masukkan Nomor Surah
+                        di panel sebelah kiri untuk memulai.</p>
+                </div>
+
+                <div id="loader" class="hidden text-center mt-8">
+                    <div class="spinner"></div>
+                    <p>Memuat Ayat...</p>
+                </div>
+
+                <!-- Data Surah Loaded Content -->
+                <div id="surahLoadedArea" class="glass-panel hidden fade-in mt-4">
+                    <div class="surah-info text-center mb-8">
+                        <h2 id="surahTitle" class="gradient-text" style="font-size: 2rem;"></h2>
+                        <p id="surahDesc" class="subtitle"></p>
+                    </div>
+
+                    <p class="text-center mb-4 subtitle">Pilih Mode Latihan:</p>
+                    <div class="mode-buttons">
+                        <button class="btn btn-card" data-mode="persiapan">
+                            <span class="mode-icon">📖</span>
+                            <span class="mode-title">Persiapan</span>
+                            <span class="mode-desc">Tampilkan nomor dan awalan ayat untuk dihafal</span>
+                        </button>
+                        <button class="btn btn-card" data-mode="potongan">
+                            <span class="mode-icon">🧩</span>
+                            <span class="mode-title">Potongan Awal</span>
+                            <span class="mode-desc">Tebak kelanjutan ayat dari potongan awal</span>
+                        </button>
+                        <button class="btn btn-card" data-mode="angka">
+                            <span class="mode-icon">🔢</span>
+                            <span class="mode-title">Angka Dulu</span>
+                            <span class="mode-desc">Ingat ayat hanya dari nomornya</span>
+                        </button>
                     </div>
                 </div>
 
-                <p class="text-center mb-4 subtitle">Pilih Mode Pembelajaran:</p>
-                <div class="mode-buttons">
-                    <button class="btn btn-card" data-mode="persiapan">
-                        <span class="mode-icon">📖</span>
-                        <span class="mode-title">Persiapan</span>
-                        <span class="mode-desc">Tampilkan nomor dan awalan ayat untuk dihafal</span>
-                    </button>
-                    <button class="btn btn-card" data-mode="potongan">
-                        <span class="mode-icon">🧩</span>
-                        <span class="mode-title">Potongan Awal</span>
-                        <span class="mode-desc">Tebak kelanjutan ayat dari potongan awal</span>
-                    </button>
-                    <button class="btn btn-card" data-mode="angka">
-                        <span class="mode-icon">🔢</span>
-                        <span class="mode-title">Angka Dulu</span>
-                        <span class="mode-desc">Ingat ayat hanya dari nomornya</span>
-                    </button>
-                </div>
-            </div>
+                <!-- Play Workspace -->
+                <main id="workspace" class="hidden mt-4">
+                    <!-- Dynamic Content Area -->
+                </main>
 
-            <main id="workspace" class="hidden">
-                <!-- Dynamic Content Area -->
-            </main>
-        </div>
-    </div>
+            </div> <!-- End Right Panel -->
+        </div> <!-- End Dashboard Layout -->
+    </div> <!-- End Main App container -->
 
     <!-- Audio element for playing verses -->
     <audio id="audioPlayer"></audio>

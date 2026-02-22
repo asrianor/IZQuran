@@ -10,6 +10,8 @@
     --accent-hover: #7c3aed;
     --gradient-1: #8b5cf6;
     --gradient-2: #ec4899;
+    --arab-font-size: 2.2rem;
+    --arab-font-size-huge: 4rem;
 }
 
 * {
@@ -26,11 +28,44 @@ body {
     display: flex;
     justify-content: center;
     padding: 2rem 1rem;
+    overflow-x: hidden;
+}
+
+.dashboard-layout {
+    display: flex;
+    width: 100%;
+    max-width: 1400px;
+    gap: 1.5rem;
+    align-items: flex-start;
+}
+
+.left-panel {
+    width: 320px;
+    flex-shrink: 0;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), margin-left 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.left-panel.collapsed {
+    margin-left: -340px;
+    /* Hide off screen + gap */
+    opacity: 0;
+    pointer-events: none;
+}
+
+.main-workspace-area {
+    flex: 1;
+    min-width: 0;
+    /* Prevents flex flex-item from overflowing */
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .app-container {
     width: 100%;
     max-width: 800px;
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
@@ -263,7 +298,37 @@ select option {
     line-height: 1.4;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 900px) {
+    .dashboard-layout {
+        position: relative;
+    }
+
+    /* Make left panel absolute over content for mobile */
+    .left-panel {
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        z-index: 1000;
+        background: var(--bg-primary);
+        padding: 1rem;
+        border-right: 1px solid var(--glass-border);
+        box-shadow: 10px 0 30px rgba(0, 0, 0, 0.5);
+        overflow-y: auto;
+        margin-left: -320px;
+        /* Hidden by default on mobile instead of inline gap */
+    }
+
+    .left-panel.show-mobile {
+        margin-left: 0 !important;
+        opacity: 1 !important;
+        pointer-events: all !important;
+    }
+
+    .left-panel.collapsed {
+        margin-left: -320px;
+    }
+
     .mode-buttons {
         flex-direction: column;
     }
@@ -480,11 +545,12 @@ select option {
 
 .arab-text {
     font-family: 'Amiri Quran', serif;
-    font-size: 2.2rem;
-    line-height: 3.5rem;
+    font-size: var(--arab-font-size);
+    line-height: calc(var(--arab-font-size) * 1.6);
     direction: rtl;
     flex: 1;
     color: white;
+    transition: font-size 0.2s ease, line-height 0.2s ease;
 }
 
 .btn-play-sm {
@@ -539,10 +605,11 @@ select option {
 
 .main-arab {
     font-family: 'Amiri Quran', serif;
-    font-size: 4rem;
+    font-size: var(--arab-font-size-huge);
     line-height: 1.5;
     direction: rtl;
     margin: 1rem 0 2rem;
+    transition: font-size 0.2s ease;
 }
 
 .player-controls {

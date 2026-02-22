@@ -14,7 +14,14 @@ const UI = {
     rangeFilter: document.getElementById('rangeFilter'),
     landingPage: document.getElementById('landingPage'),
     mainAppArea: document.getElementById('mainAppArea'),
-    btnStartApp: document.getElementById('btnStartApp')
+    btnStartApp: document.getElementById('btnStartApp'),
+    btnToggleLayout: document.getElementById('btnToggleLayout'),
+    btnToggleSidebar: document.getElementById('btnToggleSidebar'),
+    leftPanel: document.getElementById('leftPanel'),
+    fontSlider: document.getElementById('fontSlider'),
+    fontValue: document.getElementById('fontValue'),
+    surahLoadedArea: document.getElementById('surahLoadedArea'),
+    surahDescGlobal: document.getElementById('surahDescGlobal')
 };
 
 let currentSurahData = null;
@@ -83,6 +90,31 @@ function parseRange(rangeStr, maxAyat) {
     return validAyatNumbers.size > 0 ? Array.from(validAyatNumbers).sort((a, b) => a - b) : null;
 }
 
+// Sidebar Toggles
+UI.btnToggleLayout.addEventListener('click', () => {
+    UI.leftPanel.classList.toggle('collapsed');
+});
+UI.btnToggleSidebar.addEventListener('click', () => {
+    UI.leftPanel.classList.toggle('show-mobile');
+});
+
+// Font Sizer
+UI.fontSlider.addEventListener('input', (e) => {
+    const val = parseInt(e.target.value);
+    const root = document.documentElement;
+    const sizes = {
+        1: { label: 'XS', normal: '1.4rem', huge: '2.5rem' },
+        2: { label: 'S', normal: '1.8rem', huge: '3.2rem' },
+        3: { label: 'M', normal: '2.2rem', huge: '4rem' },
+        4: { label: 'L', normal: '2.8rem', huge: '5rem' },
+        5: { label: 'XL', normal: '3.5rem', huge: '6rem' }
+    };
+
+    UI.fontValue.textContent = sizes[val].label;
+    root.style.setProperty('--arab-font-size', sizes[val].normal);
+    root.style.setProperty('--arab-font-size-huge', sizes[val].huge);
+});
+
 // 1. Load Surah
 UI.btnLoadSurah.addEventListener('click', async () => {
     let no = parseInt(UI.surahNumber.value);
@@ -100,6 +132,7 @@ UI.btnLoadSurah.addEventListener('click', async () => {
     // Prepare UI
     UI.loader.classList.remove('hidden');
     UI.modeSelection.classList.add('hidden');
+    UI.surahLoadedArea.classList.add('hidden');
     UI.workspace.classList.add('hidden');
 
     try {
@@ -112,9 +145,16 @@ UI.btnLoadSurah.addEventListener('click', async () => {
         // Update titles
         UI.surahTitle.textContent = `${currentSurahData.nomor}. Surah ${currentSurahData.namaLatin} (${currentSurahData.nama})`;
         UI.surahDesc.textContent = `${currentSurahData.arti} • ${currentSurahData.jumlahAyat} Ayat`;
+        UI.surahDescGlobal.textContent = `${currentSurahData.nomor}. Surah ${currentSurahData.namaLatin} (${currentSurahData.arti})`;
 
         UI.loader.classList.add('hidden');
-        UI.modeSelection.classList.remove('hidden');
+        UI.modeSelection.classList.add('hidden');
+        UI.surahLoadedArea.classList.remove('hidden');
+
+        // Hide sidebar on mobile after loading
+        if (window.innerWidth <= 900) {
+            UI.leftPanel.classList.remove('show-mobile');
+        }
     } catch (err) {
         alert(err.message);
         UI.loader.classList.add('hidden');
@@ -164,7 +204,13 @@ UI.prepLayoutSelect.addEventListener('change', () => {
 UI.modeBtns.forEach(btn => {
     btn.addEventListener('click', () => {
         currentMode = btn.getAttribute('data-mode');
-        UI.modeSelection.classList.add('hidden');
+        UI.surahLoadedArea.classList.add('hidden'); // Hide mode selection container
+
+        // Hide sidebar automatically on desktop when starting mode for more space
+        if (window.innerWidth > 900) {
+            UI.leftPanel.classList.add('collapsed');
+        }
+
         startMode();
     });
 });
@@ -172,7 +218,12 @@ UI.modeBtns.forEach(btn => {
 function backToModes() {
     stopAudio();
     UI.workspace.classList.add('hidden');
-    UI.modeSelection.classList.remove('hidden');
+    UI.surahLoadedArea.classList.remove('hidden');
+
+    // Show sidebar again on desktop when going back to modes
+    if (window.innerWidth > 900) {
+        UI.leftPanel.classList.remove('collapsed');
+    }
 }
 
 function startMode() {
@@ -209,7 +260,7 @@ function startMode() {
 
     if (interactiveAyahs.length === 0) {
         alert("Rentang ayat tidak valid atau di luar jangkauan surah ini.");
-        UI.modeSelection.classList.remove('hidden');
+        UI.surahLoadedArea.classList.remove('hidden');
         return;
     }
 

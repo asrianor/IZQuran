@@ -1,0 +1,203 @@
+1
+00:00:00,000 --> 00:00:01,000
+Halo teman-teman developer
+
+2
+00:00:01,000 --> 00:00:02,000
+dan penggiat
+
+3
+00:00:02,000 --> 00:00:03,000
+Al-Quran.
+
+4
+00:00:03,000 --> 00:00:04,500
+Selamat datang
+
+5
+00:00:04,500 --> 00:00:05,500
+di IZQuran,
+
+6
+00:00:05,500 --> 00:00:07,000
+sebuah mini project
+
+7
+00:00:07,000 --> 00:00:08,500
+open-source sederhana
+
+8
+00:00:08,500 --> 00:00:09,500
+berbasis web
+
+9
+00:00:09,500 --> 00:00:11,000
+yang memanfaatkan API
+
+10
+00:00:11,000 --> 00:00:12,500
+publik EQuran.id.
+
+11
+00:00:12,500 --> 00:00:14,000
+Aplikasi ini hadir
+
+12
+00:00:14,000 --> 00:00:15,500
+untuk membantu melatih
+
+13
+00:00:15,500 --> 00:00:17,000
+dan menguji hafalan
+
+14
+00:00:17,000 --> 00:00:18,500
+Al-Quran.
+
+15
+00:00:18,500 --> 00:00:20,000
+Aplikasi ringan
+
+16
+00:00:20,000 --> 00:00:21,000
+tanpa database ini
+
+17
+00:00:21,000 --> 00:00:22,500
+hadir dengan fitur
+
+18
+00:00:22,500 --> 00:00:23,500
+interaktif meliputi
+
+19
+00:00:23,500 --> 00:00:25,000
+kustomisasi layout
+
+20
+00:00:25,000 --> 00:00:26,000
+kumpulan ayat,
+
+21
+00:00:26,000 --> 00:00:27,500
+mode tebak potongan
+
+22
+00:00:27,500 --> 00:00:29,000
+awal laksana flashcard,
+
+23
+00:00:29,000 --> 00:00:30,500
+mode uji hafalan
+
+24
+00:00:30,500 --> 00:00:31,500
+murni berdasarkan
+
+25
+00:00:31,500 --> 00:00:33,000
+nomor urutan,
+
+26
+00:00:33,000 --> 00:00:34,500
+filter rentang ayat
+
+27
+00:00:34,500 --> 00:00:36,000
+spesifik, dan opsi
+
+28
+00:00:36,000 --> 00:00:37,500
+acak urutan
+
+29
+00:00:37,500 --> 00:00:39,000
+untuk memperkuat
+
+30
+00:00:39,000 --> 00:00:40,500
+ingatan memori asimetris.
+
+31
+00:00:40,500 --> 00:00:41,500
+Seluruh source code
+
+32
+00:00:41,500 --> 00:00:43,000
+proyek terbuka bebas
+
+33
+00:00:43,000 --> 00:00:44,500
+di github.com/asrianor/IZQuran
+
+34
+00:00:44,500 --> 00:00:46,000
+dan dapat langsung
+
+35
+00:00:46,000 --> 00:00:47,000
+dicoba penggunaannya
+
+36
+00:00:47,000 --> 00:00:48,500
+melalui
+
+37
+00:00:48,500 --> 00:00:50,000
+asrianor.github.io/IZQuran.
+
+38
+00:00:50,000 --> 00:00:51,500
+Mari bersama-sama
+
+39
+00:00:51,500 --> 00:00:52,500
+berkolaborasi dan
+
+40
+00:00:52,500 --> 00:00:54,000
+mengembangkan wadah
+
+41
+00:00:54,000 --> 00:00:55,000
+belajar ini.
+
+42
+00:00:55,000 --> 00:00:56,500
+Segala kekurangan
+
+43
+00:00:56,500 --> 00:00:57,500
+ataupun kekhilafan
+
+44
+00:00:57,500 --> 00:00:59,000
+struktur kode murni
+
+45
+00:00:59,000 --> 00:01:00,500
+berasal dari keterbatasan
+
+46
+00:01:00,500 --> 00:01:01,500
+pemahaman admin,
+
+47
+00:01:01,500 --> 00:01:03,000
+semoga proyek
+
+48
+00:01:03,000 --> 00:01:04,000
+terbuka ini
+
+49
+00:01:04,000 --> 00:01:05,500
+membawa ragam manfaat
+
+50
+00:01:05,500 --> 00:01:07,000
+nyata dan keberkahan
+
+51
+00:01:07,000 --> 00:01:08,500
+bagi kita semua.
