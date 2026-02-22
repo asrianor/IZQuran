@@ -298,60 +298,62 @@ select option {
     line-height: 1.4;
 }
 
-.mobile-view .mobile-only {
-    display: block !important;
-}
+@media (max-width: 900px) {
+    .mobile-only {
+        display: block !important;
+    }
 
-.mobile-view .mobile-only-flex {
-    display: flex !important;
-}
+    .mobile-only-flex {
+        display: flex !important;
+    }
 
-.mobile-view .desktop-only {
-    display: none !important;
-}
+    .desktop-only {
+        display: none !important;
+    }
 
-.mobile-view .dashboard-layout {
-    position: relative;
-}
+    .dashboard-layout {
+        position: relative;
+    }
 
-/* Make left panel absolute over content for mobile */
-.mobile-view .left-panel {
-    position: fixed;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    width: 85%;
-    max-width: 360px;
-    z-index: 1000;
-    background: var(--bg-primary);
-    padding: 1.5rem;
-    border-right: 1px solid var(--glass-border);
-    box-shadow: 10px 0 30px rgba(0, 0, 0, 0.5);
-    overflow-y: auto;
-    margin-left: -100%;
-    /* Hidden by default on mobile instead of inline gap */
-}
+    /* Make left panel absolute over content for mobile */
+    .left-panel {
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        width: 85%;
+        max-width: 360px;
+        z-index: 1000;
+        background: var(--bg-primary);
+        padding: 1.5rem;
+        border-right: 1px solid var(--glass-border);
+        box-shadow: 10px 0 30px rgba(0, 0, 0, 0.5);
+        overflow-y: auto;
+        margin-left: -100%;
+        /* Hidden by default on mobile instead of inline gap */
+    }
 
-.mobile-view .left-panel.show-mobile {
-    margin-left: 0 !important;
-    opacity: 1 !important;
-    pointer-events: all !important;
-}
+    .left-panel.show-mobile {
+        margin-left: 0 !important;
+        opacity: 1 !important;
+        pointer-events: all !important;
+    }
 
-.mobile-view .left-panel.collapsed {
-    margin-left: -100%;
-}
+    .left-panel.collapsed {
+        margin-left: -100%;
+    }
 
-.mobile-view .mode-buttons {
-    flex-direction: column;
-}
+    .mode-buttons {
+        flex-direction: column;
+    }
 
-.mobile-view .input-group {
-    flex-direction: column;
-}
+    .input-group {
+        flex-direction: column;
+    }
 
-.mobile-view .config-grid {
-    grid-template-columns: 1fr;
+    .config-grid {
+        grid-template-columns: 1fr;
+    }
 }
 
 .hidden {

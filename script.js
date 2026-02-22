@@ -167,7 +167,7 @@ UI.btnLoadSurah.addEventListener('click', async () => {
         UI.surahLoadedArea.classList.remove('hidden');
 
         // Hide sidebar on mobile view after loading
-        if (document.body.classList.contains('mobile-view')) {
+        if (window.innerWidth <= 900) {
             UI.leftPanel.classList.remove('show-mobile');
         }
     } catch (err) {
@@ -195,7 +195,7 @@ UI.prepLayoutSelect.addEventListener('change', () => {
             params.innerHTML = `
                 <label>Batas Akhir Kolom Kiri:</label>
                 <input type="number" id="paramSplit" value="15" min="1" max="100"/>
-                <small style="color:var(--text-muted)">*Sisanya masuk kolom Makanan</small>
+                <small style="color:var(--text-muted)">*Sisanya masuk Kolom Kanan</small>
             `;
         } else if (val === 'focusCenter') {
             params.innerHTML = `
