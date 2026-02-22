@@ -96,12 +96,9 @@ function parseRange(rangeStr, maxAyat) {
 UI.btnToggleLayout.addEventListener('click', () => {
     UI.leftPanel.classList.toggle('collapsed');
 });
-UI.btnToggleSidebar.addEventListener('click', () => {
-    UI.leftPanel.classList.toggle('show-mobile');
-    UI.navLinks.classList.remove('show-mobile-nav'); // Hide Top Nav after selecting Search
-});
 UI.btnToggleNav.addEventListener('click', () => {
-    UI.navLinks.classList.toggle('show-mobile-nav');
+    // Tombol burger sekarang utamanya dipakai untuk memunculkan Left Panel (Settings) di Mobile
+    UI.leftPanel.classList.toggle('show-mobile');
 });
 
 // Font Sizer
