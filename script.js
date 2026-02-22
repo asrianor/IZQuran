@@ -21,7 +21,7 @@ const UI = {
     surahLoadedArea: document.getElementById('surahLoadedArea'),
     surahDescGlobal: document.getElementById('surahDescGlobal'),
     btnToggleNav: document.getElementById('btnToggleNav'),
-    viewModeSelect: document.getElementById('viewModeSelect')
+    btnToggleLayout: document.getElementById('btnToggleLayout')
 };
 
 let currentSurahData = null;
@@ -91,24 +91,19 @@ function parseRange(rangeStr, maxAyat) {
 }
 
 // Sidebar Toggles & View Mode
-function applyViewMode() {
-    if (UI.viewModeSelect.value === 'mobile') {
-        document.body.classList.add('mobile-view');
+UI.btnToggleLayout.addEventListener('click', () => {
+    // Tombol desktop ini tadinya menyembunyikan Panel Kiri (btnToggleLayout.click > leftPanel.classList.toggle('collapsed')).
+    // Sekarang user memintanya jadi Sembunyikan Kolom Kanan.
+    // Kolom kanan adalah mainWorkspaceArea.
+    const mainArea = document.getElementById('mainWorkspaceArea');
+    if (mainArea.style.display === 'none') {
+        mainArea.style.display = 'block';
+        UI.btnToggleLayout.textContent = '◧ Sembunyikan Kolom Kanan';
     } else {
-        document.body.classList.remove('mobile-view');
-        UI.leftPanel.classList.remove('show-mobile'); // Hide offcanvas safety
+        mainArea.style.display = 'none';
+        UI.btnToggleLayout.textContent = '◧ Tampilkan Kolom Kanan';
     }
-}
-
-UI.viewModeSelect.addEventListener('change', applyViewMode);
-
-// Initialize view mode based on screen width
-if (window.innerWidth <= 900) {
-    UI.viewModeSelect.value = 'mobile';
-} else {
-    UI.viewModeSelect.value = 'desktop';
-}
-applyViewMode();
+});
 
 UI.btnToggleNav.addEventListener('click', () => {
     // Tombol burger sekarang utamanya dipakai untuk memunculkan Left Panel (Settings) di Mobile
@@ -223,11 +218,6 @@ UI.modeBtns.forEach(btn => {
         currentMode = btn.getAttribute('data-mode');
         UI.surahLoadedArea.classList.add('hidden'); // Hide mode selection container
 
-        // Hide sidebar automatically on desktop view when starting mode for more space
-        if (!document.body.classList.contains('mobile-view')) {
-            UI.leftPanel.classList.add('collapsed');
-        }
-
         startMode();
     });
 });
@@ -236,11 +226,6 @@ function backToModes() {
     stopAudio();
     UI.workspace.classList.add('hidden');
     UI.surahLoadedArea.classList.remove('hidden');
-
-    // Show sidebar again on desktop view when going back to modes
-    if (!document.body.classList.contains('mobile-view')) {
-        UI.leftPanel.classList.remove('collapsed');
-    }
 }
 
 function startMode() {
