@@ -17,16 +17,25 @@
     <nav class="navbar glass-panel fade-in"
         style="border-radius:0; border-left:none; border-right:none; border-top:none; padding:1rem 2rem; display:flex; justify-content:space-between; align-items:center; position:sticky; top:0; z-index:100; margin-bottom:1rem;">
         <div style="font-weight:800; font-size:1.2rem; color:white; display: flex; align-items: center; gap: 1rem;">
-            <!-- Mobile Menu Toggle Button -->
-            <button id="btnToggleSidebar"
+            <!-- Mobile Navbar Toggle Button -->
+            <button id="btnToggleNav" class="mobile-only"
                 style="background:transparent; border:none; color:white; font-size:1.5rem; cursor:pointer;"
-                class="hidden" title="Toggle Menu">☰</button>
+                title="Toggle Menu">☰</button>
             IZQuran
         </div>
-        <div style="display:flex; gap:1rem;">
-            <!-- Desktop Layout Toggle Button -->
-            <button id="btnToggleLayout" class="btn-show-full"
-                style="display: flex; align-items: center; border-color: var(--accent);">◧ Toggle Panel</button>
+
+        <div id="navLinks" class="nav-links" style="display:flex; gap:1rem; align-items:center;">
+
+            <!-- Tombol Toggle Sidebar (Khusus Mobile di dalam Dropdown) -->
+            <button id="btnToggleSidebar" class="btn-show-full mobile-only-flex"
+                style="align-items: center; border-color: var(--gradient-1); color: var(--accent);">🔍 Cari &
+                Pengaturan</button>
+
+            <!-- Tombol Toggle Layout Workspace (Khusus Desktop) -->
+            <button id="btnToggleLayout" class="btn-show-full desktop-only"
+                style="display: flex; align-items: center; border-color: var(--accent);">◧ Sembunyikan Panel
+                Kiri</button>
+
             <a href="index.html" class="btn-show-full"
                 style="text-decoration:none; display:flex; align-items:center;">🏠 Beranda</a>
             <a href="readme.html" class="btn-show-full"

@@ -21,7 +21,9 @@ const UI = {
     fontSlider: document.getElementById('fontSlider'),
     fontValue: document.getElementById('fontValue'),
     surahLoadedArea: document.getElementById('surahLoadedArea'),
-    surahDescGlobal: document.getElementById('surahDescGlobal')
+    surahDescGlobal: document.getElementById('surahDescGlobal'),
+    btnToggleNav: document.getElementById('btnToggleNav'),
+    navLinks: document.getElementById('navLinks')
 };
 
 let currentSurahData = null;
@@ -96,6 +98,10 @@ UI.btnToggleLayout.addEventListener('click', () => {
 });
 UI.btnToggleSidebar.addEventListener('click', () => {
     UI.leftPanel.classList.toggle('show-mobile');
+    UI.navLinks.classList.remove('show-mobile-nav'); // Hide Top Nav after selecting Search
+});
+UI.btnToggleNav.addEventListener('click', () => {
+    UI.navLinks.classList.toggle('show-mobile-nav');
 });
 
 // Font Sizer
