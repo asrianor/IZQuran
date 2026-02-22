@@ -26,10 +26,12 @@
 
         <div id="navLinks" class="nav-links" style="display:flex; gap:1rem; align-items:center;">
 
-            <!-- Tombol Toggle Layout Workspace (Khusus Desktop) -->
-            <button id="btnToggleLayout" class="btn-show-full desktop-only"
-                style="display: flex; align-items: center; border-color: var(--accent);">◧ Sembunyikan Panel
-                Kiri</button>
+            <!-- Pilihan Mode Tampilan (Desktop/Mobile) -->
+            <select id="viewModeSelect" class="btn-show-full"
+                style="background: rgba(0,0,0,0.3); color: var(--accent); border: 1px solid var(--gradient-1); border-radius: 8px; padding: 0.5rem; outline: none; cursor: pointer;">
+                <option value="desktop">💻 Mode Desktop</option>
+                <option value="mobile">📱 Mode Mobile</option>
+            </select>
 
             <a href="index.html" class="btn-show-full"
                 style="text-decoration:none; display:flex; align-items:center;">🏠 Beranda</a>

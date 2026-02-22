@@ -15,15 +15,13 @@ const UI = {
     landingPage: document.getElementById('landingPage'),
     mainAppArea: document.getElementById('mainAppArea'),
     btnStartApp: document.getElementById('btnStartApp'),
-    btnToggleLayout: document.getElementById('btnToggleLayout'),
-    btnToggleSidebar: document.getElementById('btnToggleSidebar'),
     leftPanel: document.getElementById('leftPanel'),
     fontSlider: document.getElementById('fontSlider'),
     fontValue: document.getElementById('fontValue'),
     surahLoadedArea: document.getElementById('surahLoadedArea'),
     surahDescGlobal: document.getElementById('surahDescGlobal'),
     btnToggleNav: document.getElementById('btnToggleNav'),
-    navLinks: document.getElementById('navLinks')
+    viewModeSelect: document.getElementById('viewModeSelect')
 };
 
 let currentSurahData = null;
@@ -92,10 +90,26 @@ function parseRange(rangeStr, maxAyat) {
     return validAyatNumbers.size > 0 ? Array.from(validAyatNumbers).sort((a, b) => a - b) : null;
 }
 
-// Sidebar Toggles
-UI.btnToggleLayout.addEventListener('click', () => {
-    UI.leftPanel.classList.toggle('collapsed');
-});
+// Sidebar Toggles & View Mode
+function applyViewMode() {
+    if (UI.viewModeSelect.value === 'mobile') {
+        document.body.classList.add('mobile-view');
+    } else {
+        document.body.classList.remove('mobile-view');
+        UI.leftPanel.classList.remove('show-mobile'); // Hide offcanvas safety
+    }
+}
+
+UI.viewModeSelect.addEventListener('change', applyViewMode);
+
+// Initialize view mode based on screen width
+if (window.innerWidth <= 900) {
+    UI.viewModeSelect.value = 'mobile';
+} else {
+    UI.viewModeSelect.value = 'desktop';
+}
+applyViewMode();
+
 UI.btnToggleNav.addEventListener('click', () => {
     // Tombol burger sekarang utamanya dipakai untuk memunculkan Left Panel (Settings) di Mobile
     UI.leftPanel.classList.toggle('show-mobile');
@@ -154,8 +168,8 @@ UI.btnLoadSurah.addEventListener('click', async () => {
         UI.modeSelection.classList.add('hidden');
         UI.surahLoadedArea.classList.remove('hidden');
 
-        // Hide sidebar on mobile after loading
-        if (window.innerWidth <= 900) {
+        // Hide sidebar on mobile view after loading
+        if (document.body.classList.contains('mobile-view')) {
             UI.leftPanel.classList.remove('show-mobile');
         }
     } catch (err) {
@@ -209,8 +223,8 @@ UI.modeBtns.forEach(btn => {
         currentMode = btn.getAttribute('data-mode');
         UI.surahLoadedArea.classList.add('hidden'); // Hide mode selection container
 
-        // Hide sidebar automatically on desktop when starting mode for more space
-        if (window.innerWidth > 900) {
+        // Hide sidebar automatically on desktop view when starting mode for more space
+        if (!document.body.classList.contains('mobile-view')) {
             UI.leftPanel.classList.add('collapsed');
         }
 
@@ -223,8 +237,8 @@ function backToModes() {
     UI.workspace.classList.add('hidden');
     UI.surahLoadedArea.classList.remove('hidden');
 
-    // Show sidebar again on desktop when going back to modes
-    if (window.innerWidth > 900) {
+    // Show sidebar again on desktop view when going back to modes
+    if (!document.body.classList.contains('mobile-view')) {
         UI.leftPanel.classList.remove('collapsed');
     }
 }
