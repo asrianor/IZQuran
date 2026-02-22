@@ -38,7 +38,7 @@ body {
 }
 
 .left-panel {
-    width: 320px;
+    width: 380px;
     flex-shrink: 0;
     transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), margin-left 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s;
     display: flex;
@@ -47,7 +47,7 @@ body {
 }
 
 .left-panel.collapsed {
-    margin-left: -340px;
+    margin-left: -400px;
     /* Hide off screen + gap */
     opacity: 0;
     pointer-events: none;
@@ -320,13 +320,15 @@ select option {
     top: 0;
     left: 0;
     bottom: 0;
+    width: 85%;
+    max-width: 360px;
     z-index: 1000;
     background: var(--bg-primary);
-    padding: 1rem;
+    padding: 1.5rem;
     border-right: 1px solid var(--glass-border);
     box-shadow: 10px 0 30px rgba(0, 0, 0, 0.5);
     overflow-y: auto;
-    margin-left: -320px;
+    margin-left: -100%;
     /* Hidden by default on mobile instead of inline gap */
 }
 
@@ -337,7 +339,7 @@ select option {
 }
 
 .mobile-view .left-panel.collapsed {
-    margin-left: -320px;
+    margin-left: -100%;
 }
 
 .mobile-view .mode-buttons {

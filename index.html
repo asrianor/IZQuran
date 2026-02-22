@@ -93,7 +93,7 @@
 
                 <div id="loader" class="hidden text-center">
                     <div class="spinner"></div>
-                    <p style="font-size: 0.9rem;">Memuat Ayat...</p>
+                    <p>Memuat Ayat...</p>
                 </div>
 
                 <div id="sidebarConfig" style="display:flex; flex-direction:column; gap:1.5rem;">
@@ -101,14 +101,14 @@
                     <div
                         style="background: rgba(0,0,0,0.2); padding: 1rem; border-radius: 12px; border: 1px solid var(--glass-border);">
                         <label
-                            style="display:flex; justify-content:space-between; margin-bottom:0.5rem; color:var(--accent); font-weight:600; font-size: 0.9rem;">
+                            style="display:flex; justify-content:space-between; margin-bottom:0.5rem; color:var(--accent); font-weight:600; font-size: 1rem;">
                             <span>Besar Huruf Arab:</span>
                             <span id="fontValue" style="color: white; font-weight: normal;">L</span>
                         </label>
                         <input type="range" id="fontSlider" min="1" max="5" step="1" value="3"
                             style="width: 100%; cursor: pointer;">
                         <div
-                            style="display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--text-muted); margin-top: 0.3rem;">
+                            style="display: flex; justify-content: space-between; font-size: 0.9rem; color: var(--text-muted); margin-top: 0.3rem;">
                             <span>A</span><span>A</span>
                         </div>
                     </div>
@@ -117,16 +117,16 @@
                     <div
                         style="background: rgba(0,0,0,0.2); padding: 1rem; border-radius: 12px; border: 1px solid var(--glass-border);">
                         <label
-                            style="display:block; margin-bottom:0.5rem; color:var(--accent); font-weight:600; font-size: 0.9rem;">Rentang
+                            style="display:block; margin-bottom:0.5rem; color:var(--accent); font-weight:600; font-size: 1rem;">Rentang
                             Ayat (Opsional):</label>
                         <input type="text" id="rangeFilter" placeholder="Contoh: 1-5" class="w-full"
-                            style="padding: 0.6rem; font-size: 0.9rem;">
+                            style="padding: 0.8rem; font-size: 1rem;">
                     </div>
 
                     <!-- Config Box 1 -->
                     <div class="config-box">
-                        <label style="font-size: 0.9rem;">Mode Persiapan:</label>
-                        <select id="prepLayoutSelect" class="w-full mt-2" style="padding: 0.5rem;">
+                        <label style="font-size: 1rem;">Mode Persiapan:</label>
+                        <select id="prepLayoutSelect" class="w-full mt-2" style="padding: 0.8rem; font-size: 1rem;">
                             <option value="default">Daftar Biasa</option>
                             <option value="perX">Tabel Per-X Ayat</option>
                             <option value="splitLR">Pisah Kiri-Kanan</option>
@@ -138,8 +138,9 @@
 
                     <!-- Config Box 2 -->
                     <div class="config-box">
-                        <label style="font-size: 0.9rem;">Mode Potongan/Angka:</label>
-                        <select id="interactiveOrderSelect" class="w-full mt-2" style="padding: 0.5rem;">
+                        <label style="font-size: 1rem;">Mode Potongan/Angka:</label>
+                        <select id="interactiveOrderSelect" class="w-full mt-2"
+                            style="padding: 0.8rem; font-size: 1rem;">
                             <option value="sequential">Urut (Dari Awal)</option>
                             <option value="random">Acak (Random)</option>
                             <option value="reverse">Mundur (Dari Akhir)</option>
