@@ -10,7 +10,8 @@ const UI = {
     audioPlayer: document.getElementById('audioPlayer'),
     prepLayoutSelect: document.getElementById('prepLayoutSelect'),
     prepParams: document.getElementById('prepParams'),
-    interactiveOrderSelect: document.getElementById('interactiveOrderSelect')
+    interactiveOrderSelect: document.getElementById('interactiveOrderSelect'),
+    rangeFilter: document.getElementById('rangeFilter')
 };
 
 let currentSurahData = null;
@@ -37,6 +38,33 @@ function playAudio(url) {
 function stopAudio() {
     UI.audioPlayer.pause();
     UI.audioPlayer.currentTime = 0;
+}
+
+function parseRange(rangeStr, maxAyat) {
+    if (!rangeStr || rangeStr.trim() === '') return null; // Return null if no filter
+
+    const parts = rangeStr.split(',');
+    const validAyatNumbers = new Set();
+
+    parts.forEach(part => {
+        part = part.trim();
+        if (part.includes('-')) {
+            let [start, end] = part.split('-').map(num => parseInt(num, 10));
+            if (!isNaN(start) && !isNaN(end)) {
+                if (start > end) [start, end] = [end, start];
+                start = Math.max(1, start);
+                end = Math.min(maxAyat, end);
+                for (let i = start; i <= end; i++) validAyatNumbers.add(i);
+            }
+        } else {
+            const num = parseInt(part, 10);
+            if (!isNaN(num) && num >= 1 && num <= maxAyat) {
+                validAyatNumbers.add(num);
+            }
+        }
+    });
+
+    return validAyatNumbers.size > 0 ? Array.from(validAyatNumbers).sort((a, b) => a - b) : null;
 }
 
 // 1. Load Surah
@@ -135,20 +163,39 @@ function startMode() {
     currentVerseIndex = 0;
     currentState = 0;
 
-    // Prepare the interactive array based on the selected order
-    let order = UI.interactiveOrderSelect.value; // sequential, random, reverse
-    let baseArray = [...currentSurahData.ayat];
+    // Parse range filter if any
+    const filterStr = UI.rangeFilter.value;
+    const allowedNumbers = parseRange(filterStr, currentSurahData.ayat.length);
 
-    if (order === 'reverse') {
-        baseArray.reverse();
-    } else if (order === 'random') {
-        // Fisher-Yates shuffle
-        for (let i = baseArray.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [baseArray[i], baseArray[j]] = [baseArray[j], baseArray[i]];
+    // Create base array (Filtered or Full)
+    let baseArray = [];
+    if (allowedNumbers) {
+        baseArray = currentSurahData.ayat.filter(a => allowedNumbers.includes(a.nomorAyat));
+    } else {
+        baseArray = [...currentSurahData.ayat];
+    }
+
+    // Prepare the interactive array based on the selected order (Only matters for non-persiapan, or persiapan too if needed)
+    let order = UI.interactiveOrderSelect.value;
+
+    if (currentMode !== 'persiapan') {
+        if (order === 'reverse') {
+            baseArray.reverse();
+        } else if (order === 'random') {
+            for (let i = baseArray.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [baseArray[i], baseArray[j]] = [baseArray[j], baseArray[i]];
+            }
         }
     }
-    interactiveAyahs = baseArray;
+
+    interactiveAyahs = baseArray; // Will be used by all modes now
+
+    if (interactiveAyahs.length === 0) {
+        alert("Rentang ayat tidak valid atau di luar jangkauan surah ini.");
+        UI.modeSelection.classList.remove('hidden');
+        return;
+    }
 
     renderWorkspace();
 }
@@ -186,7 +233,7 @@ function renderPersiapan() {
     container.className = 'persiapan-wrapper fade-in';
 
     let html = '';
-    const ayahs = currentSurahData.ayat;
+    const ayahs = interactiveAyahs; // Use the filtered list
 
     // Helper functions for layout generation
     const renderAyatRow = (ayat) => {
