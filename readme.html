@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dokumentasi & Disclaimer - IZQuran</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri+Quran&family=Inter:wght@300;400;600;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .doc-container {
+            max-width: 800px;
+            margin: 0 auto;
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        .doc-section {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .doc-section h2 {
+            color: var(--accent);
+            margin-bottom: 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 0.5rem;
+        }
+
+        .doc-section h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: white;
+        }
+
+        .doc-section ul {
+            padding-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .doc-section li {
+            margin-bottom: 0.5rem;
+        }
+
+        .disclaimer-box {
+            background: rgba(236, 72, 153, 0.1);
+            border-left: 4px solid var(--gradient-2);
+            padding: 1.5rem;
+            border-radius: 0 12px 12px 0;
+            margin-bottom: 2rem;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Top Navigation Bar -->
+    <nav class="navbar glass-panel fade-in"
+        style="border-radius:0; border-left:none; border-right:none; border-top:none; padding:1rem 2rem; display:flex; justify-content:space-between; align-items:center; position:sticky; top:0; z-index:100; margin-bottom:1rem;">
+        <div style="font-weight:800; font-size:1.2rem; color:white;">IZQuran</div>
+        <div style="display:flex; gap:1rem;">
+            <a href="index.html" class="btn-show-full"
+                style="text-decoration:none; display:flex; align-items:center;">🏠 Beranda</a>
+            <a href="readme.html" class="btn-show-full"
+                style="text-decoration:none; display:flex; align-items:center;">📖 Dokumentasi</a>
+        </div>
+    </nav>
+
+    <div class="app-container doc-container">
+        <header class="text-center mb-8 fade-in">
+            <h1 class="gradient-text">IZQuran - Dokumentasi</h1>
+            <p class="subtitle">Panduan Penggunaan & Informasi Legal</p>
+        </header>
+
+        <div class="disclaimer-box fade-in">
+            <h3 style="margin-top:0; color:var(--gradient-2);">⚠️ Disclaimer Penting</h3>
+            <p><strong>IZQuran</strong> adalah aplikasi antarmuka pembelajaran independen dan <strong>TIDAK MEMILIKI
+                    KERJASAMA LANGSUNG, AFILIASI, ATAU IZIN RESMI</strong> dari pengelola <strong>EQuran.id</strong>.
+            </p>
+            <p style="margin-top:0.5rem;">Aplikasi ini hanya memanfaatkan Endpoint API Publik Edukasional yang
+                disediakan secara bebas oleh EQuran.id (https://equran.id/api/v2/) untuk tujuan ekstraksi data
+                pembelajaran (Teks Al-Quran, Terjemahan, dan Audio).</p>
+            <p style="margin-top:0.5rem;">Seluruh hak cipta terjemahan, tafsir, dan audio dari API tersebut sepenuhnya
+                adalah milik <strong>EQuran.id</strong> beserta pihak qari terkait. Penggunaan data mematuhi kebijakan
+                "Penggunaan API Gratis untuk Developer" selama dalam batasan penggunaan wajar.</p>
+        </div>
+
+        <div class="doc-section fade-in">
+            <h2>📖 Readme & Fitur (IZQuran)</h2>
+            <p>Aplikasi ini dirancang khusus untuk memfasilitasi metode hafalan spesifik melalui pemotongan awalan ayat.
+                Fitur yang tersedia meliputi:</p>
+            <ul>
+                <li><strong>Mode Persiapan:</strong> Membaca seluruh ayat dalam satu halaman dengan opsi layout (Daftar,
+                    Per-Kotak, Kiri-Kanan, Ayat Fokus, 4 Kuadran).</li>
+                <li><strong>Mode Potongan Awal:</strong> Melatih ingatan kelanjutan sebuah ayat bermodalkan hanya kata
+                    pertamanya saja.</li>
+                <li><strong>Mode Angka Dulu:</strong> Melatih ingatan ayat murni hanya dari penomoran urutannya.</li>
+                <li><strong>Opsi Pengurutan:</strong> Mendukung pengulangan ayat secara Linear (Urut), Random (Acak),
+                    maupun Reversed (Mundur).</li>
+                <li><strong>Pemutar Audio:</strong> Tersedia pemutar audio terintegrasi dari Qari Yasser Al-Dosari pada
+                    masing-masing ayat.</li>
+            </ul>
+        </div>
+
+        <div class="doc-section fade-in">
+            <h2>📋 Catatan Terkait Layanan (EQuran.id)</h2>
+            <p>Sesuai dengan sumber data yang kami ambil, pengguna diharapkan memahami dan mematuhi ringkasan kebijakan
+                dari penyedia infrastruktur data (EQuran.id):</p>
+
+            <h3>Terms of Service (Penggunaan API)</h3>
+            <ul>
+                <li>Menggunakan layanan untuk keperluan pribadi dan edukasi.</li>
+                <li>API disediakan gratis untuk penggunaan yang wajar (terdapat rate limiting).</li>
+                <li>Data yang diperoleh tidak boleh dijual atau diperjualbelikan (Aplikasi IZQuran ini 100% Gratis).
+                </li>
+                <li>Teks Al-Quran adalah milik umat Islam. Terjemahan, audio dsb, dilindungi hak cipta EQuran.id.</li>
+            </ul>
+
+            <h3>Kebijakan Privasi Otomatis (EQuran.id)</h3>
+            <p>Saat aplikasi memanggil Murottal (Audio) atau mengambil data teks langsung dari server
+                <code>cdn.equran.id</code> atau <code>api.equran.id</code>, informasi teknis pengguna (seperti Alamat
+                IP, jenis browser, dan perangkat) mungkin dikumpulkan otomatis oleh sistem EQuran.id sebagai bagian dari
+                *Analytics* dan fungsi *Security* server mereka.
+            </p>
+            <p>Namun, <strong>IZQuran sendiri sama sekali tidak mengumpulkan, melacak, maupun menyimpan data
+                    personal</strong> pengguna dalam bentuk apapun. Layanan ini sepenuhnya bersifat *Client-Side*
+                (berjalan di browser lokal).</p>
+        </div>
+    </div>
+</body>
+
+</html>
