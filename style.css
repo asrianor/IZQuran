@@ -34,7 +34,7 @@ body {
     width: 100%;
     max-width: 1400px;
     gap: 1.5rem;
-    align-items: flex-start;
+    align-items: stretch;
 }
 
 .left-panel {
@@ -44,11 +44,6 @@ body {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
-    position: sticky;
-    top: 5rem;
-    height: calc(100vh - 6.5rem);
-    min-height: 600px;
-    overflow-y: auto;
 }
 
 .left-panel.collapsed {

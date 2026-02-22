@@ -106,8 +106,11 @@ UI.btnToggleLayout.addEventListener('click', () => {
 });
 
 UI.btnToggleNav.addEventListener('click', () => {
-    // Tombol burger sekarang utamanya dipakai untuk memunculkan Left Panel (Settings) di Mobile
-    UI.leftPanel.classList.toggle('show-mobile');
+    if (window.innerWidth <= 900) {
+        UI.leftPanel.classList.toggle('show-mobile');
+    } else {
+        UI.leftPanel.classList.toggle('collapsed');
+    }
 });
 
 // Font Sizer
